@@ -106,4 +106,23 @@ class Comic
         $result->bind_param("i", $comic_id);
         return $result->execute();
     }
+
+    public function getComicsByPage($limit, $offset)
+    {
+        $sql = "SELECT * FROM tbl_comics LIMIT ? OFFSET ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Also add a method to count total comics for pagination calculation
+    public function getTotalComicsCount()
+    {
+        $sql = "SELECT COUNT(*) as total FROM tbl_comics";
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'];
+    }
 }
