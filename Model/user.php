@@ -38,13 +38,13 @@ class User
         return $result->execute();
     }
 
-    public function editUser($user_id, $firstName, $lastName, $email, $password)
+    public function editUser($user_id, $username, $email, $password, $role)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "UPDATE tbl_users SET firstName = ?, lastName = ?, email = ?, password = ? WHERE user_id = ?";
+        $sql = "UPDATE tbl_users SET username = ?, email = ?, password = ?, role = ? WHERE user_id = ?";
         $result = $this->conn->prepare($sql);
-        $result->bind_param("ssssi", $firstName, $lastName, $email, $hashedPassword, $user_id);
+        $result->bind_param("ssssi", $username, $email, $hashedPassword, $role, $user_id);
         return $result->execute();
     }
 

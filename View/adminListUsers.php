@@ -56,6 +56,9 @@ $user = new User();
                                                     <a class="btn-delete" href="../Controllers/action_user.php?delete=<?php echo $row['user_id'] ?>">
                                                         <i class="fas fa-trash"></i> Delete
                                                     </a>
+                                                    <a href="adminEditUser.php?edit=<?php echo $row['user_id'] ?>" class="btn-edit">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
